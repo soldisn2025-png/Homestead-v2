@@ -172,14 +172,34 @@
     <section class="card">
       <h2>Hero</h2>
       <div class="grid">
-        <label>Hero 이미지 URL/경로
-          <input id="heroImage" type="text">
+        <label>Hero 이미지 1 URL/경로
+          <input id="heroImage0" type="text">
         </label>
         <div class="upload-row">
-          <label>Hero 이미지 파일 업로드
-            <input id="heroUpload" type="file" accept="image/*">
+          <label>Hero 이미지 1 파일 업로드
+            <input id="heroUpload0" type="file" accept="image/*">
           </label>
-          <img id="heroPreview" class="preview" alt="Hero preview">
+          <img id="heroPreview0" class="preview" alt="Hero 1 preview">
+        </div>
+
+        <label>Hero 이미지 2 URL/경로
+          <input id="heroImage1" type="text">
+        </label>
+        <div class="upload-row">
+          <label>Hero 이미지 2 파일 업로드
+            <input id="heroUpload1" type="file" accept="image/*">
+          </label>
+          <img id="heroPreview1" class="preview" alt="Hero 2 preview">
+        </div>
+
+        <label>Hero 이미지 3 URL/경로
+          <input id="heroImage2" type="text">
+        </label>
+        <div class="upload-row">
+          <label>Hero 이미지 3 파일 업로드
+            <input id="heroUpload2" type="file" accept="image/*">
+          </label>
+          <img id="heroPreview2" class="preview" alt="Hero 3 preview">
         </div>
       </div>
       <div class="grid two">
@@ -295,7 +315,7 @@
     const defaults = {
       branding: { ko: "홈스테이드 서울", en: "Homestead Seoul" },
       media: {
-        heroImage: "images/6.png",
+        heroImages: ["images/6.png", "images/3.png", "images/4.png"],
         gallery: [
           { src: "images/1.png" },
           { src: "images/2.png" },
@@ -366,7 +386,15 @@
         return {
           branding: { ...defaults.branding, ...(parsed.branding || {}) },
           media: {
-            heroImage: parsed.media?.heroImage || defaults.media.heroImage,
+            heroImages: defaults.media.heroImages.map((item, i) => {
+              if (typeof parsed.media?.heroImages?.[i] === "string" && parsed.media.heroImages[i].trim()) {
+                return parsed.media.heroImages[i].trim();
+              }
+              if (i === 0 && typeof parsed.media?.heroImage === "string" && parsed.media.heroImage.trim()) {
+                return parsed.media.heroImage.trim();
+              }
+              return item;
+            }),
             gallery: defaults.media.gallery.map((item, i) => ({
               src: parsed.media?.gallery?.[i]?.src || item.src
             }))
@@ -460,8 +488,13 @@
     function fillForm(data) {
       document.getElementById("brandKo").value = data.branding.ko;
       document.getElementById("brandEn").value = data.branding.en;
-      document.getElementById("heroImage").value = data.media.heroImage;
-      setPreview("heroPreview", data.media.heroImage);
+      const heroImages = Array.isArray(data.media.heroImages) ? data.media.heroImages : defaults.media.heroImages;
+      heroImages.forEach((src, i) => {
+        const input = document.getElementById("heroImage" + i);
+        if (!input) return;
+        input.value = src || "";
+        setPreview("heroPreview" + i, src || "");
+      });
       document.getElementById("heroTitleKo").value = data.translations.ko.heroTitle;
       document.getElementById("heroTitleEn").value = data.translations.en.heroTitle;
       document.getElementById("heroSubtitleKo").value = data.translations.ko.heroSubtitle;
@@ -495,7 +528,8 @@
           en: document.getElementById("brandEn").value.trim()
         },
         media: {
-          heroImage: document.getElementById("heroImage").value.trim(),
+          heroImages: Array.from({ length: 3 }, (_, i) => document.getElementById("heroImage" + i).value.trim()),
+          heroImage: document.getElementById("heroImage0").value.trim(),
           gallery: Array.from({ length: 6 }, (_, i) => ({
             src: document.getElementById("gallery" + i).value.trim()
           }))
@@ -568,8 +602,10 @@
     if (session) {
       document.getElementById("who").textContent = `인증됨: ${session.email}`;
       fillForm(readData());
-      bindPreviewOnInput("heroImage", "heroPreview");
-      bindFileToInput("heroUpload", "heroImage", "heroPreview");
+      for (let i = 0; i < 3; i += 1) {
+        bindPreviewOnInput("heroImage" + i, "heroPreview" + i);
+        bindFileToInput("heroUpload" + i, "heroImage" + i, "heroPreview" + i);
+      }
       for (let i = 0; i < 6; i += 1) {
         bindPreviewOnInput("gallery" + i, "galleryPreview" + i);
         bindFileToInput("galleryUpload" + i, "gallery" + i, "galleryPreview" + i);

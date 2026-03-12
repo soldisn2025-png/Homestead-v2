@@ -4,6 +4,7 @@ const FALLBACK_HERO_IMAGE =
   "https://images.unsplash.com/photo-1508668577309-9595be798f5d?auto=format&fit=crop&w=1800&q=80";
 const FALLBACK_ROOM_IMAGE =
   "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?auto=format&fit=crop&w=1200&q=80";
+const HERO_CAROUSEL_INTERVAL_MS = 5200;
 
 const DEFAULT_BRANDING = {
   ko: "홈스테이드 서울",
@@ -20,7 +21,7 @@ const DEFAULT_CONTACT_CONFIG = {
 };
 
 const DEFAULT_MEDIA = {
-  heroImage: "images/6.png",
+  heroImages: ["images/6.png", "images/3.png", "images/4.png"],
   gallery: [
     { src: "images/1.png", captionKey: "captionRoom1", altKo: "객실 1", altEn: "Room 1" },
     { src: "images/2.png", captionKey: "captionCorridor", altKo: "복도", altEn: "Corridor" },
@@ -180,6 +181,8 @@ const mediaConfig = JSON.parse(JSON.stringify(DEFAULT_MEDIA));
 const translations = JSON.parse(JSON.stringify(BASE_TRANSLATIONS));
 let currentLang = localStorage.getItem("preferred_lang") || "ko";
 let lightbox = null;
+let heroCarouselTimer = null;
+let heroSlideIndex = 0;
 
 function mergeFlatStrings(target, source) {
   if (!source || typeof source !== "object") return;
@@ -198,7 +201,15 @@ function loadAdminOverrides() {
     mergeFlatStrings(contactConfig, overrides.contact);
 
     if (overrides.media && typeof overrides.media === "object") {
-      if (typeof overrides.media.heroImage === "string") mediaConfig.heroImage = overrides.media.heroImage;
+      if (Array.isArray(overrides.media.heroImages)) {
+        overrides.media.heroImages.forEach((src, i) => {
+          if (i > 2) return;
+          if (typeof src === "string" && src.trim()) mediaConfig.heroImages[i] = src.trim();
+        });
+      }
+      if (typeof overrides.media.heroImage === "string" && overrides.media.heroImage.trim()) {
+        mediaConfig.heroImages[0] = overrides.media.heroImage.trim();
+      }
       if (Array.isArray(overrides.media.gallery)) {
         overrides.media.gallery.forEach((item, i) => {
           if (!mediaConfig.gallery[i]) return;
@@ -238,6 +249,44 @@ function setImageSource(img, source, fallback, anchor) {
   if (anchor) anchor.href = source || fallback;
 }
 
+function normalizeHeroImages(images) {
+  const list = Array.isArray(images)
+    ? images
+        .map((item) => (typeof item === "string" ? item.trim() : ""))
+        .filter((item) => item.length > 0)
+    : [];
+  if (list.length === 0) list.push(FALLBACK_HERO_IMAGE);
+  while (list.length < 3) list.push(list[list.length - 1]);
+  return list.slice(0, 3);
+}
+
+function stopHeroCarousel() {
+  if (heroCarouselTimer) {
+    clearInterval(heroCarouselTimer);
+    heroCarouselTimer = null;
+  }
+}
+
+function setActiveHeroSlide(slides, index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+  });
+}
+
+function startHeroCarousel() {
+  stopHeroCarousel();
+  const slides = Array.from(document.querySelectorAll(".hero-carousel .hero-image"));
+  if (slides.length === 0) return;
+  heroSlideIndex = 0;
+  setActiveHeroSlide(slides, heroSlideIndex);
+  if (slides.length < 2) return;
+
+  heroCarouselTimer = window.setInterval(() => {
+    heroSlideIndex = (heroSlideIndex + 1) % slides.length;
+    setActiveHeroSlide(slides, heroSlideIndex);
+  }, HERO_CAROUSEL_INTERVAL_MS);
+}
+
 function applyBranding() {
   const brandKo = document.getElementById("brandKo");
   const brandEn = document.getElementById("brandEn");
@@ -248,10 +297,16 @@ function applyBranding() {
 }
 
 function applyMedia() {
-  const hero = document.getElementById("heroImage");
-  if (hero) {
-    setImageSource(hero, mediaConfig.heroImage, FALLBACK_HERO_IMAGE);
-    hero.alt = currentLang === "ko" ? "서울 풍경" : "Seoul city view";
+  const heroSlides = Array.from(document.querySelectorAll(".hero-carousel .hero-image"));
+  if (heroSlides.length > 0) {
+    const heroImages = normalizeHeroImages(mediaConfig.heroImages);
+    heroSlides.forEach((slide, i) => {
+      setImageSource(slide, heroImages[i], FALLBACK_HERO_IMAGE);
+      slide.alt = "Seoul city view";
+    });
+    startHeroCarousel();
+  } else {
+    stopHeroCarousel();
   }
 
   mediaConfig.gallery.forEach((item, index) => {
