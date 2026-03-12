@@ -385,42 +385,76 @@
       }
     }
 
+    function normalizeData(parsed) {
+      return {
+        branding: { ...defaults.branding, ...(parsed?.branding || {}) },
+        media: {
+          heroImages: defaults.media.heroImages.map((item, i) => {
+            if (typeof parsed?.media?.heroImages?.[i] === "string" && parsed.media.heroImages[i].trim()) {
+              return parsed.media.heroImages[i].trim();
+            }
+            if (i === 0 && typeof parsed?.media?.heroImage === "string" && parsed.media.heroImage.trim()) {
+              return parsed.media.heroImage.trim();
+            }
+            return item;
+          }),
+          gallery: defaults.media.gallery.map((item, i) => ({
+            src: parsed?.media?.gallery?.[i]?.src || item.src
+          }))
+        },
+        translations: {
+          ko: { ...defaults.translations.ko, ...(parsed?.translations?.ko || {}) },
+          en: { ...defaults.translations.en, ...(parsed?.translations?.en || {}) }
+        },
+        contact: { ...defaults.contact, ...(parsed?.contact || {}) }
+      };
+    }
+
     function readData() {
       try {
         const raw = localStorage.getItem(KEY);
         if (!raw) return clone(defaults);
         const parsed = JSON.parse(raw);
-        return {
-          branding: { ...defaults.branding, ...(parsed.branding || {}) },
-          media: {
-            heroImages: defaults.media.heroImages.map((item, i) => {
-              if (typeof parsed.media?.heroImages?.[i] === "string" && parsed.media.heroImages[i].trim()) {
-                return parsed.media.heroImages[i].trim();
-              }
-              if (i === 0 && typeof parsed.media?.heroImage === "string" && parsed.media.heroImage.trim()) {
-                return parsed.media.heroImage.trim();
-              }
-              return item;
-            }),
-            gallery: defaults.media.gallery.map((item, i) => ({
-              src: parsed.media?.gallery?.[i]?.src || item.src
-            }))
-          },
-          translations: {
-            ko: { ...defaults.translations.ko, ...(parsed.translations?.ko || {}) },
-            en: { ...defaults.translations.en, ...(parsed.translations?.en || {}) }
-          },
-          contact: { ...defaults.contact, ...(parsed.contact || {}) }
-        };
+        return normalizeData(parsed);
       } catch (_) {
         return clone(defaults);
       }
     }
 
-    function writeData(data) {
+    async function readServerData() {
+      try {
+        const response = await fetch("/api/site-config", { cache: "no-store" });
+        if (!response.ok) return null;
+        const result = await response.json();
+        if (!result || !result.ok || !result.config || typeof result.config !== "object") return null;
+        try {
+          localStorage.setItem(KEY, JSON.stringify(result.config, null, 2));
+        } catch (_) {
+          // Ignore local cache failures.
+        }
+        return normalizeData(result.config);
+      } catch (_) {
+        return null;
+      }
+    }
+
+    async function writeData(data) {
+      let serverSaved = false;
+      try {
+        const response = await fetch("/api/site-config", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ config: data }),
+        });
+        const result = await response.json().catch(() => null);
+        serverSaved = Boolean(response.ok && result && result.ok);
+      } catch (_) {
+        serverSaved = false;
+      }
+
       try {
         localStorage.setItem(KEY, JSON.stringify(data, null, 2));
-        return { ok: true };
+        return { ok: true, serverSaved };
       } catch (err) {
         return {
           ok: false,
@@ -573,18 +607,23 @@
       document.getElementById("status").textContent = msg;
     }
 
-    document.getElementById("saveBtn").addEventListener("click", () => {
-      const result = writeData(getFormData());
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const result = await writeData(getFormData());
       if (!result.ok) {
         setStatus(result.message);
         return;
       }
-      setStatus("저장 완료: 새로고침하면 즉시 반영됩니다.");
+      if (result.serverSaved) {
+        setStatus("저장 완료: 모든 기기/브라우저에 반영됩니다.");
+      } else {
+        setStatus("로컬 저장 완료: 서버 저장 실패로 현재 브라우저에만 반영됩니다.");
+      }
     });
 
-    document.getElementById("resetBtn").addEventListener("click", () => {
+    document.getElementById("resetBtn").addEventListener("click", async () => {
       localStorage.removeItem(KEY);
       fillForm(clone(defaults));
+      await writeData(clone(defaults));
       setStatus("초기화 완료");
     });
 
@@ -608,7 +647,6 @@
     const session = requireSession();
     if (session) {
       document.getElementById("who").textContent = `인증됨: ${session.email}`;
-      fillForm(readData());
       for (let i = 0; i < 3; i += 1) {
         bindPreviewOnInput("heroImage" + i, "heroPreview" + i);
         bindFileToInput("heroUpload" + i, "heroImage" + i, "heroPreview" + i);
@@ -617,6 +655,16 @@
         bindPreviewOnInput("gallery" + i, "galleryPreview" + i);
         bindFileToInput("galleryUpload" + i, "gallery" + i, "galleryPreview" + i);
       }
+      (async () => {
+        const serverData = await readServerData();
+        if (serverData) {
+          fillForm(serverData);
+          setStatus("서버 설정 로드 완료");
+        } else {
+          fillForm(readData());
+          setStatus("로컬 설정 로드 완료");
+        }
+      })();
     }
   </script>
 </body>

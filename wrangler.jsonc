@@ -2,6 +2,20 @@
   "name": "homestead",
   "main": "src/index.js",
   "compatibility_date": "2026-03-12",
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SITE_CONFIG_DO",
+        "class_name": "SiteConfigStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v2-site-config-store",
+      "new_sqlite_classes": ["SiteConfigStore"]
+    }
+  ],
   "assets": {
     "directory": ".",
     "binding": "ASSETS"

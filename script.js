@@ -191,44 +191,62 @@ function mergeFlatStrings(target, source) {
   });
 }
 
-function loadAdminOverrides() {
+function mergeAdminOverrides(overrides) {
+  if (!overrides || typeof overrides !== "object") return;
+
+  mergeFlatStrings(branding, overrides.branding);
+  mergeFlatStrings(contactConfig, overrides.contact);
+
+  if (overrides.media && typeof overrides.media === "object") {
+    if (Array.isArray(overrides.media.heroImages)) {
+      overrides.media.heroImages.forEach((src, i) => {
+        if (i > 2) return;
+        if (typeof src === "string" && src.trim()) mediaConfig.heroImages[i] = src.trim();
+      });
+    }
+    if (typeof overrides.media.heroImage === "string" && overrides.media.heroImage.trim()) {
+      mediaConfig.heroImages[0] = overrides.media.heroImage.trim();
+    }
+    if (Array.isArray(overrides.media.gallery)) {
+      overrides.media.gallery.forEach((item, i) => {
+        if (!mediaConfig.gallery[i]) return;
+        if (item && typeof item.src === "string") mediaConfig.gallery[i].src = item.src;
+        if (item && typeof item.altKo === "string") mediaConfig.gallery[i].altKo = item.altKo;
+        if (item && typeof item.altEn === "string") mediaConfig.gallery[i].altEn = item.altEn;
+      });
+    }
+  }
+
+  if (overrides.translations && typeof overrides.translations === "object") {
+    ["ko", "en"].forEach((lang) => {
+      if (overrides.translations[lang]) {
+        mergeFlatStrings(translations[lang], overrides.translations[lang]);
+      }
+    });
+  }
+}
+
+function loadLocalAdminOverrides() {
   try {
     const raw = localStorage.getItem(ADMIN_OVERRIDE_KEY);
     if (!raw) return;
     const overrides = JSON.parse(raw);
-
-    mergeFlatStrings(branding, overrides.branding);
-    mergeFlatStrings(contactConfig, overrides.contact);
-
-    if (overrides.media && typeof overrides.media === "object") {
-      if (Array.isArray(overrides.media.heroImages)) {
-        overrides.media.heroImages.forEach((src, i) => {
-          if (i > 2) return;
-          if (typeof src === "string" && src.trim()) mediaConfig.heroImages[i] = src.trim();
-        });
-      }
-      if (typeof overrides.media.heroImage === "string" && overrides.media.heroImage.trim()) {
-        mediaConfig.heroImages[0] = overrides.media.heroImage.trim();
-      }
-      if (Array.isArray(overrides.media.gallery)) {
-        overrides.media.gallery.forEach((item, i) => {
-          if (!mediaConfig.gallery[i]) return;
-          if (item && typeof item.src === "string") mediaConfig.gallery[i].src = item.src;
-          if (item && typeof item.altKo === "string") mediaConfig.gallery[i].altKo = item.altKo;
-          if (item && typeof item.altEn === "string") mediaConfig.gallery[i].altEn = item.altEn;
-        });
-      }
-    }
-
-    if (overrides.translations && typeof overrides.translations === "object") {
-      ["ko", "en"].forEach((lang) => {
-        if (overrides.translations[lang]) {
-          mergeFlatStrings(translations[lang], overrides.translations[lang]);
-        }
-      });
-    }
+    mergeAdminOverrides(overrides);
   } catch (_) {
     // Ignore malformed override payload and fall back to defaults.
+  }
+}
+
+async function loadServerAdminOverrides() {
+  try {
+    const response = await fetch("/api/site-config", { cache: "no-store" });
+    if (!response.ok) return false;
+    const result = await response.json();
+    if (!result || !result.ok || !result.config || typeof result.config !== "object") return false;
+    mergeAdminOverrides(result.config);
+    return true;
+  } catch (_) {
+    return false;
   }
 }
 
@@ -521,8 +539,9 @@ window.HOMESTEAD_ADMIN_META = {
   allowedEmail: ALLOWED_ADMIN_EMAIL,
 };
 
-function init() {
-  loadAdminOverrides();
+async function init() {
+  const serverLoaded = await loadServerAdminOverrides();
+  if (!serverLoaded) loadLocalAdminOverrides();
   bindLanguageButtons();
   bindMobileDrawer();
   bindReveal();

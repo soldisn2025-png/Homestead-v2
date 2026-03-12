@@ -6,7 +6,7 @@ Single-page bilingual (KO/EN) marketing website with Cloudflare Workers + Static
 - `index.html` - UI structure and content sections
 - `styles.css` - mobile-first design system and animations
 - `script.js` - i18n, drawer nav, gallery, contact links, inquiry submit
-- `src/index.js` - Worker API (`/api/inquiry`, `/api/public-config`) + static asset pass-through
+- `src/index.js` - Worker API (`/api/inquiry`, `/api/public-config`, `/api/site-config`) + static asset pass-through
 - `wrangler.jsonc` - Worker + assets configuration
 - `admin-login.html` - Google sign-in page for admin access
 - `admin.html` - admin editor (requires authenticated session)
@@ -31,6 +31,10 @@ Edit from `admin.html` (recommended) or directly in `script.js`:
 
 Admin menu stores values in browser `localStorage` key:
 - `homestead_admin_overrides`
+
+Cross-device sync:
+- Admin `Save` writes to Worker Durable Object (`/api/site-config`) so desktop/mobile show the same content.
+- `localStorage` is now fallback cache only.
 
 ## Admin access control
 - `admin-login.html` supports Google sign-in + ID/PW backup login.
@@ -59,6 +63,7 @@ Admin menu stores values in browser `localStorage` key:
    - `SMS_FROM` (optional)
    - `TURNSTILE_SECRET_KEY` (optional)
 4. For Turnstile widget, set real site key in `index.html` (`data-sitekey`).
+5. Durable Object migration is included in `wrangler.jsonc`; first deploy creates `SiteConfigStore`.
 
 ## API contract
 `POST /api/inquiry`
@@ -89,6 +94,25 @@ Request JSON:
 {
   "id": "string",
   "password": "string"
+}
+```
+
+`GET /api/site-config`
+
+Response JSON:
+```json
+{
+  "ok": true,
+  "config": {}
+}
+```
+
+`PUT /api/site-config`
+
+Request JSON:
+```json
+{
+  "config": {}
 }
 ```
 

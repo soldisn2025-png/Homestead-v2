@@ -8,6 +8,12 @@ function json(body, status = 200) {
   });
 }
 
+function getSiteConfigStub(env) {
+  if (!env.SITE_CONFIG_DO) return null;
+  const id = env.SITE_CONFIG_DO.idFromName("primary");
+  return env.SITE_CONFIG_DO.get(id);
+}
+
 function getCanonicalRedirectResponse(request, env) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
@@ -24,6 +30,47 @@ function getCanonicalRedirectResponse(request, env) {
   url.hostname = canonicalHost;
   url.protocol = "https:";
   return Response.redirect(url.toString(), 308);
+}
+
+async function handleGetSiteConfig(env) {
+  const stub = getSiteConfigStub(env);
+  if (!stub) {
+    return json(
+      { ok: false, code: "site_config_unavailable", message: "Site config store is not configured." },
+      503
+    );
+  }
+  const response = await stub.fetch("https://site-config/get");
+  return new Response(response.body, { status: response.status, headers: response.headers });
+}
+
+async function handlePutSiteConfig(request, env) {
+  const stub = getSiteConfigStub(env);
+  if (!stub) {
+    return json(
+      { ok: false, code: "site_config_unavailable", message: "Site config store is not configured." },
+      503
+    );
+  }
+
+  let payload;
+  try {
+    payload = await request.json();
+  } catch (_) {
+    return json({ ok: false, code: "bad_request", message: "Invalid request format." }, 400);
+  }
+
+  const config = payload && typeof payload === "object" && payload.config ? payload.config : payload;
+  if (!config || typeof config !== "object") {
+    return json({ ok: false, code: "invalid_value", message: "Invalid config payload." }, 422);
+  }
+
+  const response = await stub.fetch("https://site-config/set", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ config }),
+  });
+  return new Response(response.body, { status: response.status, headers: response.headers });
 }
 
 function getMessage(lang, key) {
@@ -301,6 +348,14 @@ export default {
       return handlePublicConfig(env);
     }
 
+    if (pathname === "/api/site-config" && request.method === "GET") {
+      return handleGetSiteConfig(env);
+    }
+
+    if (pathname === "/api/site-config" && request.method === "PUT") {
+      return handlePutSiteConfig(request, env);
+    }
+
     if (pathname === "/api/admin-login" && request.method === "POST") {
       return handleAdminPasswordLogin(request, env);
     }
@@ -320,6 +375,7 @@ export default {
           emailFrom: Boolean(env.EMAIL_FROM),
           turnstile: Boolean(env.TURNSTILE_SECRET_KEY),
           passwordLogin: Boolean(env.ADMIN_LOGIN_ID && env.ADMIN_LOGIN_PASSWORD),
+          siteConfigStore: Boolean(env.SITE_CONFIG_DO),
         },
       });
     }
@@ -343,3 +399,35 @@ export default {
     });
   },
 };
+
+export class SiteConfigStore {
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/get" && request.method === "GET") {
+      const config = await this.ctx.storage.get("site_config");
+      return json({ ok: true, config: config || null });
+    }
+
+    if (url.pathname === "/set" && request.method === "POST") {
+      let payload;
+      try {
+        payload = await request.json();
+      } catch (_) {
+        return json({ ok: false, code: "bad_request", message: "Invalid request format." }, 400);
+      }
+      const config = payload?.config;
+      if (!config || typeof config !== "object") {
+        return json({ ok: false, code: "invalid_value", message: "Invalid config payload." }, 422);
+      }
+      await this.ctx.storage.put("site_config", config);
+      return json({ ok: true });
+    }
+
+    return json({ ok: false, code: "not_found", message: "Not found." }, 404);
+  }
+}
