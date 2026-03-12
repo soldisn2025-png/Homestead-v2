@@ -62,8 +62,7 @@ Cross-device sync:
    - `SMS_TO` (optional)
    - `SMS_FROM` (optional)
    - `TURNSTILE_SECRET_KEY` (optional)
-4. For Turnstile widget, set real site key in `index.html` (`data-sitekey`).
-5. Durable Object migration is included in `wrangler.jsonc`; first deploy creates `SiteConfigStore`.
+4. Durable Object migration is included in `wrangler.jsonc`; first deploy creates `SiteConfigStore`.
 
 ## API contract
 `POST /api/inquiry`
@@ -75,7 +74,7 @@ Request JSON:
   "contact": "string",
   "message": "string",
   "language": "ko|en",
-  "turnstileToken": "string"
+  "turnstileToken": "string (optional)"
 }
 ```
 

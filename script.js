@@ -502,9 +502,6 @@ async function handleInquirySubmit(event) {
     const result = await response.json();
     if (response.ok && result.ok) {
       form.reset();
-      const tokenNode = document.getElementById("turnstileToken");
-      if (tokenNode) tokenNode.value = "";
-      if (window.turnstile) window.turnstile.reset();
       setStatus(t("formSuccess"), "success");
       return;
     }
@@ -528,11 +525,6 @@ function bindYear() {
   const yearNode = document.getElementById("year");
   if (yearNode) yearNode.textContent = String(new Date().getFullYear());
 }
-
-window.onTurnstileSuccess = function onTurnstileSuccess(token) {
-  const tokenInput = document.getElementById("turnstileToken");
-  if (tokenInput) tokenInput.value = token;
-};
 
 window.HOMESTEAD_ADMIN_META = {
   key: ADMIN_OVERRIDE_KEY,

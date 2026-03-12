@@ -22,7 +22,6 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.1/css/glightbox.min.css">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -241,8 +240,6 @@
           <span data-i18n="formConsent"></span>
         </label>
         <input type="hidden" name="language" id="formLanguage" value="ko">
-        <input type="hidden" name="turnstileToken" id="turnstileToken" value="">
-        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="onTurnstileSuccess"></div>
         <button type="submit" class="btn btn-primary full" data-i18n="formSubmit"></button>
       </form>
       <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
