@@ -5,7 +5,7 @@ Single-page bilingual (KO/EN) marketing website with Cloudflare Workers + Static
 ## Local files
 - `index.html` - UI structure and content sections
 - `styles.css` - mobile-first design system and animations
-- `script.js` - i18n, drawer nav, gallery, contact links, inquiry submit
+- `app.js` - localized page rendering, drawer nav, gallery modal, contact links, inquiry submit
 - `src/index.js` - Worker API (`/api/inquiry`, `/api/public-config`, `/api/site-config`) + static asset pass-through
 - `wrangler.jsonc` - Worker + assets configuration
 - `admin-login.html` - Google sign-in page for admin access
@@ -21,7 +21,7 @@ Put these in `images/`:
 - `6.png`
 
 ## Update contact values
-Edit from `admin.html` (recommended) or directly in `script.js`:
+Edit from `admin.html` (recommended) or directly in `app.js`:
 - branding (KO/EN)
 - hero text and image
 - gallery image paths
@@ -131,5 +131,6 @@ Response JSON:
 
 ## Notes
 - SMS send is non-blocking by design (email success is required for `ok=true`).
-- Pricing is manual seasonal range display in the UI (`script.js` i18n copy).
+- Pricing is rendered in the UI (`app.js`) with Korean split-pricing presentation and English all-in presentation.
+- `UX_STRATEGY.md` captures the requested bilingual IA, wireframes, pricing logic, and localization rules.
 - Use `/api/health` to confirm runtime config flags after deployment.
