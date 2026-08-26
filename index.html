@@ -3,24 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homestead Seoul | Private Room Urban Living in Seoul</title>
+  <title>Homestead Seoul | Private Rooms for Solo Stays in Seoul</title>
   <meta
     id="metaDescription"
     name="description"
-    content="Single-occupancy private rooms in Seoul for 14 days or longer. Quiet, furnished, practical urban living near Bangbae Station."
+    content="서울 방배동 고시원 | 저렴하고 깨끗한 단기·월세 숙소 | Seoul budget accommodation"
   >
-  <meta id="ogTitle" property="og:title" content="Homestead Seoul | Private Room Urban Living in Seoul">
+  <link rel="canonical" href="https://homesteadseoul.com/">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta id="ogTitle" property="og:title" content="Homestead Seoul | Private Rooms for Solo Stays in Seoul">
   <meta
     id="ogDescription"
     property="og:description"
-    content="Private furnished rooms for solo stays in Seoul. Calm, clean, practical monthly living near Bangbae Station."
+    content="Private rooms in Seoul for solo stays, with practical furnished living and straightforward inquiry."
   >
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json" id="lodgingSchema"></script>
+  <script type="application/ld+json" id="faqSchema"></script>
   <script>
     (function () {
-      if (location.hostname.toLowerCase() === "www.homesteadseoul.com") {
+      const host = location.hostname.toLowerCase();
+      if (host.endsWith("github.io")) {
+        location.replace("https://homesteadseoul.com" + location.pathname + location.search + location.hash);
+        return;
+      }
+      if (host === "www.homesteadseoul.com") {
         location.replace("https://homesteadseoul.com" + location.pathname + location.search + location.hash);
       }
     })();
@@ -28,18 +37,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;700&display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260315d">
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
       <div class="header-inner">
         <a href="#top" class="brand" aria-label="Homestead Seoul home">
-          <span class="brand-mark">HS</span>
-          <span class="brand-copy">
+          <span class="brand-logo" aria-hidden="true">
+            <span class="brand-logo-mark">
+              <svg viewBox="0 0 72 58" class="brand-logo-icon" role="img" aria-label="Homestead Seoul logo">
+                <path d="M10 28 36 8l26 20v20H10Z" fill="#c59469"></path>
+                <path d="M17 30h38v16H17Z" fill="#fffaf2" stroke="#c9a17b" stroke-width="2"></path>
+                <path d="M31 31h10v15H31Z" fill="none" stroke="#2a241f" stroke-width="2"></path>
+                <path d="M36 31v15" fill="none" stroke="#2a241f" stroke-width="2"></path>
+              </svg>
+            </span>
+            <span class="brand-logo-wordmark">
+              <span>HOME</span>
+              <span>STEAD</span>
+              <span>SEOUL</span>
+            </span>
+            <span class="brand-logo-rule"></span>
+            <span class="brand-logo-neighborhood">방배동</span>
+            <span class="brand-logo-since" id="brandSince">Since 2007</span>
+          </span>
+          <span class="sr-only">
             <strong class="brand-title" id="brandTitle">Homestead Seoul</strong>
             <span class="brand-subtitle" id="brandSubtitle">Private Room Urban Living</span>
           </span>
@@ -76,6 +102,7 @@
         <div class="drawer-brand">
           <strong>Homestead Seoul</strong>
           <span id="drawerTagline">Private Room Urban Living</span>
+          <span class="drawer-since" id="drawerSince">Since 2007</span>
         </div>
         <button id="drawerCloseBtn" class="drawer-close" type="button" aria-label="Close menu">X</button>
       </div>
@@ -116,6 +143,7 @@
     </figure>
   </div>
 
-  <script src="app.js"></script>
-</body>
+  <script src="site-data.js?v=20260315d"></script>
+  <script src="app.js?v=20260315d"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a312a3a5fa437ca7',t:'MTc4Nzc0NTIzOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
