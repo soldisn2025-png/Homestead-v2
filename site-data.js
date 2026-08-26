@@ -361,13 +361,13 @@
         },
         included: {
           eyebrow: "Included",
-          title: "생활에 필요한 기본 구성만 심플하게",
-          desc: "",
+          title: "필요한 건 대부분 이미 갖춰져 있어요",
+          desc: "입주 당일부터 바로 생활할 수 있도록 기본을 채웠습니다.",
           cards: [
-            { title: "개인 욕실", desc: "모든 객실에 개인 욕실이 포함됩니다." },
-            { title: "전자레인지", desc: "별도의 주방 시설은 없으며, 전자레인지를 이용할 수 있습니다." },
-            { title: "세탁기 + 냉장고", desc: "장기 생활에 필요한 세탁과 개인 냉장 보관이 가능합니다." },
-            { title: "침대 + 침구 + 생활용품", desc: "침대, 침구, 수건, 비누 등 기본 생활용품이 준비됩니다." },
+            { icon: "bathroom", title: "개인 욕실", desc: "모든 객실에 개인 욕실이 포함됩니다." },
+            { icon: "microwave", title: "전자레인지", desc: "별도의 주방 시설은 없으며, 전자레인지를 이용할 수 있습니다." },
+            { icon: "laundry", title: "세탁기 + 냉장고", desc: "장기 생활에 필요한 세탁과 개인 냉장 보관이 가능합니다." },
+            { icon: "bed", title: "침대 + 침구 + 생활용품", desc: "침대, 침구, 수건, 비누 등 기본 생활용품이 준비됩니다." },
           ],
         },
         pricing: {
@@ -521,13 +521,13 @@
         },
         included: {
           eyebrow: "Included",
-          title: "Simple essentials already set up",
-          desc: "",
+          title: "Most of what you need is already here",
+          desc: "The basics are covered so you can start living from day one.",
           cards: [
-            { title: "Private bathroom", desc: "Every room includes its own private bathroom." },
-            { title: "Microwave", desc: "No full kitchen in the room — a microwave is available for simple meal prep." },
-            { title: "Washing machine and refrigerator", desc: "Useful for longer stays and everyday storage." },
-            { title: "Bed, table, and basic supplies", desc: "You receive the basics needed to start living right away." },
+            { icon: "bathroom", title: "Private bathroom", desc: "Every room includes its own private bathroom." },
+            { icon: "microwave", title: "Microwave", desc: "No full kitchen in the room — a microwave is available for simple meal prep." },
+            { icon: "laundry", title: "Washing machine and refrigerator", desc: "Useful for longer stays and everyday storage." },
+            { icon: "bed", title: "Bed, table, and basic supplies", desc: "You receive the basics needed to start living right away." },
           ],
         },
         pricing: {
