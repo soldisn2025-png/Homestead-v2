@@ -505,6 +505,10 @@ main {
   padding: 22px 0 72px;
 }
 
+section[id] {
+  scroll-margin-top: 104px;
+}
+
 .app-root {
   display: grid;
   gap: 22px;
