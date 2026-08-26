@@ -67,7 +67,7 @@ h1, h2, h3,
 .pricing-col-label,
 .filter-btn,
 .lang-switch button,
-.brand-logo-since,
+.brand-logo-meta,
 .step-index {
   font-family: var(--font-label);
 }
@@ -124,65 +124,47 @@ button {
 }
 
 .brand-logo {
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  padding: 2px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .brand-logo-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
 }
 
 .brand-logo-icon {
-  width: 48px;
+  width: 34px;
   height: auto;
 }
 
-.brand-logo-wordmark {
-  display: grid;
-  justify-items: center;
-  gap: 0;
-}
-
-.brand-logo-wordmark span {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.1em;
-  color: var(--text);
-  text-indent: 0.1em;
-}
-
-.brand-logo-rule {
-  width: 42px;
-  height: 1px;
-  background: var(--logo-roof);
-}
-
-.brand-logo-neighborhood {
-  color: var(--logo-roof);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.brand-logo-since {
-  color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.brand-copy {
+.brand-logo-text {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: flex-start;
+}
+
+.brand-logo-wordmark {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.brand-logo-meta {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .sr-only {
@@ -1591,11 +1573,11 @@ section[id] {
 
 @media (min-width: 640px) {
   .brand-logo-icon {
-    width: 54px;
+    width: 38px;
   }
 
-  .brand-logo-wordmark span {
-    font-size: 15px;
+  .brand-logo-wordmark {
+    font-size: 17px;
   }
 
   .hero-grid,
@@ -1954,6 +1936,28 @@ section[id] {
 @media (max-width: 859px) {
   .footer-admin {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    gap: 7px;
+  }
+
+  .brand-logo-icon {
+    width: 27px;
+  }
+
+  .brand-logo-wordmark {
+    font-size: 12px;
+  }
+
+  .brand-logo-meta {
+    font-size: 9px;
   }
 }
 
