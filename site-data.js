@@ -28,7 +28,7 @@
       whatsappNumber: "821032868682",
       naverUrl: "https://map.naver.com/p/entry/place/2069232581?placePath=%2Fticket%3Fentry%3Dpll%26from%3Dnx%26fromNxList%3Dtrue%26from%3Dmap%26fromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202608260949%26locale%3Dko%26svcName%3Dmap_pcv5&placeSearchOption=entry%3Dpll%26fromNxList%3Dtrue&searchType=place&c=15.00,0,0,0,dh",
       mapEmbed:
-        "https://www.google.com/maps?q=Bangbae%20Station%20Seoul&output=embed",
+        "https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EB%B0%A9%EB%B0%B0%EB%8F%99%20911-14&output=embed",
     },
     media: {
       heroImages: [ROOM_IMAGES.heroS, ROOM_IMAGES.heroA, ROOM_IMAGES.heroB],
