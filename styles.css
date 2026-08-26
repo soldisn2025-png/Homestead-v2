@@ -1947,7 +1947,7 @@ section[id] {
 
 @media (min-width: 1100px) {
   .simple-included-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

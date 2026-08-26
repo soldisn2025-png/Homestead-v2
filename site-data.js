@@ -575,7 +575,6 @@
           channels: [
             { type: "email", label: "Email", hint: "Best for written details and date requests" },
             { type: "whatsapp", label: "WhatsApp", hint: "Fast for international messaging" },
-            { type: "kakao", label: "KakaoTalk", hint: "Useful if you already use Kakao" },
             { type: "phone", label: "Phone", hint: "Direct contact when needed" },
           ],
           form: {
