@@ -303,11 +303,12 @@
           { href: "#quick-facts", label: "Quick Facts" },
           { href: "#gallery", label: "사진" },
           { href: "#included", label: "기본 구성" },
+          { href: "#testimonials", label: "후기" },
           { href: "#location", label: "위치" },
           { href: "#faq", label: "FAQ" },
           { href: "#contact", label: "문의" },
         ],
-        sections: ["hero", "quickFacts", "gallery", "included", "location", "faq", "contact"],
+        sections: ["hero", "quickFacts", "gallery", "included", "testimonials", "location", "faq", "contact"],
         hero: {
           kicker: "Bangbae Station · Private room · One person only",
           title: "방배역 도보 2분<br>혼자 쓰는 풀옵션",
@@ -383,6 +384,16 @@
           sideBody: "한국어 페이지는 비교와 문의가 빨라야 하므로, 꼭 필요한 조건만 짧고 명확하게 보여줍니다.",
           notes: ["모든 객실은 1인 전용입니다.", "관리비/공과금은 별도로 받지 않습니다.", "보증금은 1개월분 기준입니다."],
         },
+        testimonials: {
+          eyebrow: "후기",
+          title: "실제로 머물렀던 분들의 후기",
+          items: [
+            { name: "Justin", location: "", rating: 5, quote: "체크인, 체크아웃 상황에서 우리의 사정을 이해해주고 잘 도와줘서 감사했습니다!" },
+            { name: "회철", location: "", rating: 5, quote: "위치가 정말 좋고, 아늑하면서도 넓은 공간이었습니다. 요청드린 새 이불과 수건도 빠르게 챙겨주셔서 편하게 지낼 수 있었어요. 이 지역에 다시 온다면 꼭 다시 묵고 싶습니다." },
+            { name: "지윤", location: "", rating: 5, quote: "호스트분들이 친절하고 응답도 빨랐어요. 공간도 깨끗하고 아늑했습니다. 꼭 추천하고 싶어요!" },
+            { name: "지혜", location: "", rating: 5, quote: "즐거운 숙박이었습니다. 공간이 넓고 아늑했어요. 책상, 좋은 와이파이, TV 등 필요한 것들이 잘 갖춰져 있어서 일하기에도 쉬기에도 좋았습니다." },
+          ],
+        },
         location: {
           eyebrow: "Location",
           title: "",
@@ -455,10 +466,11 @@
           { href: "#about", label: "About" },
           { href: "#gallery", label: "Gallery" },
           { href: "#included", label: "Included" },
+          { href: "#testimonials", label: "Reviews" },
           { href: "#faq", label: "FAQ" },
           { href: "#contact", label: "Contact" },
         ],
-        sections: ["hero", "concept", "gallery", "included", "location", "faq", "contact"],
+        sections: ["hero", "concept", "gallery", "included", "testimonials", "location", "faq", "contact"],
         hero: {
           kicker: "Solo traveler stay · Furnished room · Seoul",
           title: "A furnished private room in Seoul for solo travelers",
@@ -542,6 +554,18 @@
           sideTitle: "Stay terms",
           sideBody: "The goal here is clarity before inquiry, so international guests know how the stay works and what to expect.",
           notes: ["Every room is for one person only.", "The monthly price does not add extra utility charges.", "A refundable incidental deposit applies.", "Room 205 is quoted individually."],
+        },
+        testimonials: {
+          eyebrow: "Reviews",
+          title: "What past guests have said",
+          items: [
+            { name: "Ganesh", location: "Lawrence, Massachusetts", rating: 5, quote: "The host was great with us from start to end. The place suited our purpose and felt like home. It's conveniently located near many restaurants and other places of interest. Everything we asked for was arranged without any trouble." },
+            { name: "Zachary", location: "Baltimore, Maryland", rating: 5, quote: "Great host, very good communication and help with our stay! Would definitely stay again — very clean and tidy." },
+            { name: "Davis", location: "Cartersville, Virginia", rating: 5, quote: "Wonderful location and a great stay!" },
+            { name: "Jonathan", location: "Raleigh, North Carolina", rating: 5, quote: "This is my 2nd time staying here, and as before it was amazing — peaceful and quiet." },
+            { name: "Breanna", location: "", rating: 5, quote: "Absolutely perfect stay! The hosts were super nice through the entire process. The home itself was comfortable and welcoming. My friends and I had an amazing three nights there — honestly, it was perfect in every way. Highly recommend staying here!" },
+            { name: "Hugo", location: "Richmond, Virginia", rating: 5, quote: "The host was very attentive and kind. It was definitely a pleasant experience." },
+          ],
         },
         location: {
           eyebrow: "Location",
