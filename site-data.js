@@ -24,7 +24,7 @@
     contact: {
       phone: "010-3286-8682",
       email: "homesteadseoul@gmail.com",
-      kakaoUrl: "https://open.kakao.com/o/replace-me",
+      kakaoUrl: "https://open.kakao.com/o/s9L6lBli",
       whatsappNumber: "821032868682",
       naverUrl: "https://map.naver.com/p/entry/place/2069232581?placePath=%2Fticket%3Fentry%3Dpll%26from%3Dnx%26fromNxList%3Dtrue%26from%3Dmap%26fromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202608260949%26locale%3Dko%26svcName%3Dmap_pcv5&placeSearchOption=entry%3Dpll%26fromNxList%3Dtrue&searchType=place&c=15.00,0,0,0,dh",
       mapEmbed:
