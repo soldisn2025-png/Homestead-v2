@@ -1250,7 +1250,7 @@ section[id] {
 }
 
 .testimonial-stars {
-  color: var(--accent);
+  color: var(--accent-strong);
   font-size: 15px;
   letter-spacing: 2px;
 }
