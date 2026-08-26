@@ -365,7 +365,7 @@
           desc: "",
           cards: [
             { title: "개인 욕실", desc: "모든 객실에 개인 욕실이 포함됩니다." },
-            { title: "간단 조리 + 전자레인지", desc: "객실 내 또는 운영 기준에 맞는 간단 조리 환경을 이용할 수 있습니다." },
+            { title: "전자레인지", desc: "별도의 주방 시설은 없으며, 전자레인지를 이용할 수 있습니다." },
             { title: "세탁기 + 냉장고", desc: "장기 생활에 필요한 세탁과 개인 냉장 보관이 가능합니다." },
             { title: "침대 + 침구 + 생활용품", desc: "침대, 침구, 수건, 비누 등 기본 생활용품이 준비됩니다." },
           ],
@@ -465,7 +465,7 @@
           subtitle:
             "Homestead Seoul offers furnished private rooms for one person per room, designed for solo travelers who want a calm, practical base in Seoul.",
           chips: ["Solo occupancy only", "Private bathroom", "Furnished essentials", "Subway access"],
-          notes: ["From $19.99/day", "Card payment available"],
+          notes: ["From $19.99/day"],
           primaryAction: { href: "#contact", label: "Check availability" },
           secondaryAction: { type: "whatsapp", label: "WhatsApp" },
           tertiaryAction: { href: "#gallery", label: "See room photos" },
@@ -525,9 +525,9 @@
           desc: "",
           cards: [
             { title: "Private bathroom", desc: "Every room includes its own private bathroom." },
-            { title: "Kitchenette or simple cooking access", desc: "Cooking access is available according to the room setup and operator guidance." },
+            { title: "Microwave", desc: "No full kitchen in the room — a microwave is available for simple meal prep." },
             { title: "Washing machine and refrigerator", desc: "Useful for longer stays and everyday storage." },
-            { title: "Bed, microwave, table, and basic supplies", desc: "You receive the basics needed to start living right away." },
+            { title: "Bed, table, and basic supplies", desc: "You receive the basics needed to start living right away." },
           ],
         },
         pricing: {
