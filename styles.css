@@ -384,6 +384,16 @@ button {
   border-color: var(--line-strong);
 }
 
+.btn-channel--naver {
+  background: #03c75a;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(3, 199, 90, 0.22);
+}
+
+.btn-channel--naver:hover {
+  background: #02a94c;
+}
+
 .header-cta {
   display: none;
 }
@@ -1356,6 +1366,16 @@ section[id] {
 .channel-card--phone {
   background: linear-gradient(180deg, rgba(241, 239, 232, 0.72), rgba(255, 252, 247, 0.96));
   border-color: rgba(207, 202, 187, 0.56);
+}
+
+.channel-card--naver {
+  background: linear-gradient(180deg, rgba(3, 199, 90, 0.14), rgba(249, 255, 251, 0.96));
+  border-color: rgba(3, 199, 90, 0.28);
+}
+
+.channel-card--naver .channel-badge,
+.channel-card--naver .channel-action {
+  color: #028a41;
 }
 
 .contact-wrap--channels {

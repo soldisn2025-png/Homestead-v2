@@ -26,7 +26,7 @@
       email: "homesteadseoul@gmail.com",
       kakaoUrl: "https://open.kakao.com/o/replace-me",
       whatsappNumber: "821032868682",
-      naverUrl: "",
+      naverUrl: "https://map.naver.com/p/entry/place/2069232581?placePath=%2Fticket%3Fentry%3Dpll%26from%3Dnx%26fromNxList%3Dtrue%26from%3Dmap%26fromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202608260949%26locale%3Dko%26svcName%3Dmap_pcv5&placeSearchOption=entry%3Dpll%26fromNxList%3Dtrue&searchType=place&c=15.00,0,0,0,dh",
       mapEmbed:
         "https://www.google.com/maps?q=Bangbae%20Station%20Seoul&output=embed",
     },
@@ -413,6 +413,7 @@
             { type: "kakao", label: "카카오톡", hint: "" },
             { type: "phone", label: "전화 문의", hint: "" },
             { type: "email", label: "이메일", hint: "" },
+            { type: "naver", label: "네이버 예약", hint: "네이버에서 바로 예약" },
           ],
           form: {
             name: "이름",
@@ -429,6 +430,7 @@
             { type: "kakao", label: "카카오톡" },
             { type: "phone", label: "전화 문의" },
             { type: "email", label: "이메일" },
+            { type: "naver", label: "네이버 예약" },
           ],
         },
         footer: {
