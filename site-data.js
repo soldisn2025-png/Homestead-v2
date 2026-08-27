@@ -308,7 +308,14 @@
           { href: "#faq", label: "FAQ" },
           { href: "#contact", label: "문의" },
         ],
-        sections: ["hero", "quickFacts", "gallery", "included", "testimonials", "location", "faq", "contact"],
+        sections: ["hero", "trustStrip", "quickFacts", "gallery", "included", "testimonials", "location", "faq", "contact"],
+        trustStrip: {
+          items: [
+            { icon: "manager", title: "1층 상주 매니저", desc: "체크인·체크아웃부터 건물 보안까지, 1층 상주 매니저가 직접 도와드립니다." },
+            { icon: "privacy", title: "개인 욕실, 잠금 도어", desc: "모든 객실은 전용 욕실과 잠금장치가 있어 프라이버시가 보장됩니다." },
+            { icon: "reply", title: "빠른 답변", desc: "카카오톡으로 언제든 문의하세요. 보통 1시간 이내 답변드립니다." },
+          ],
+        },
         hero: {
           kicker: "Bangbae Station · Private room · One person only",
           title: "방배역 도보 2분<br>혼자 쓰는 풀옵션",
@@ -420,6 +427,7 @@
           eyebrow: "Inquiry",
           title: "입실 문의",
           message: "카카오톡, 전화, 이메일 중 편한 채널로 문의해 주세요. 희망 입실 시기와 체류 기간을 알려주시면 가능한 호실을 안내해드립니다.",
+          responseNote: "보통 1시간 이내 답변드립니다",
           channels: [
             { type: "kakao", label: "카카오톡", hint: "" },
             { type: "phone", label: "전화 문의", hint: "" },
@@ -470,7 +478,14 @@
           { href: "#faq", label: "FAQ" },
           { href: "#contact", label: "Contact" },
         ],
-        sections: ["hero", "concept", "gallery", "included", "testimonials", "location", "faq", "contact"],
+        sections: ["hero", "trustStrip", "concept", "gallery", "included", "testimonials", "location", "faq", "contact"],
+        trustStrip: {
+          items: [
+            { icon: "manager", title: "On-site manager, 1st floor", desc: "Our manager on the first floor helps with check-in, check-out, and keeps the building secure." },
+            { icon: "privacy", title: "Private bathroom, locking door", desc: "Every room has its own bathroom and lock for real privacy." },
+            { icon: "reply", title: "Fast replies", desc: "Message us on KakaoTalk anytime — we usually reply within an hour." },
+          ],
+        },
         hero: {
           kicker: "Solo traveler stay · Furnished room · Seoul",
           title: "A furnished private room in Seoul for solo travelers",
@@ -596,6 +611,7 @@
           eyebrow: "Contact",
           title: "Ask about availability in the easiest way for you",
           message: "",
+          responseNote: "Usually replies within 1 hour",
           channels: [
             { type: "email", label: "Email", hint: "Best for written details and date requests" },
             { type: "whatsapp", label: "WhatsApp", hint: "Fast for international messaging" },

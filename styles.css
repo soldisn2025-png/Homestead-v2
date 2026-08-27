@@ -751,6 +751,74 @@ section[id] {
   font-size: 14px;
 }
 
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.trust-item {
+  padding: 22px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.trust-item:last-child {
+  border-right: none;
+}
+
+.trust-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(0, 148, 68, 0.22);
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trust-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.trust-copy h3 {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.trust-copy p {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .trust-item:last-child {
+    border-bottom: none;
+  }
+}
+
 .concept-grid,
 .collection-grid,
 .room-grid,
@@ -1292,6 +1360,50 @@ section[id] {
 .contact-message {
   color: var(--text-soft);
   font-size: 15px;
+}
+
+.response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 148, 68, 0.2);
+}
+
+.response-badge .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.response-badge .pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0.5;
+  animation: response-pulse 2s ease-out infinite;
+}
+
+@keyframes response-pulse {
+  0% { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .response-badge .pulse::after { animation: none; }
 }
 
 .channel-card {
