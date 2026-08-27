@@ -395,9 +395,11 @@
           eyebrow: "후기",
           title: "실제로 머물렀던 분들의 후기",
           items: [
-            { name: "Justin", location: "", rating: 5, quote: "체크인, 체크아웃 상황에서 우리의 사정을 이해해주고 잘 도와줘서 감사했습니다!" },
+            { name: "상헌", location: "", rating: 5, quote: "위치가 정말 좋고(지하철, 버스, 공원) 관리인분과 호스트 모두 매우 친절합니다." },
+            { name: "Hyeran", location: "", rating: 5, quote: "방배역 3번출구에서 2분이라 정말 안전하고, 주변에 편의점부터 다이소, 빵집까지 다 있어서 편리해요. 1층 관리실에 관리아저씨도 계시고 복도에 CCTV가 있어서 안심이 됩니다. 혼자 지내실 분들한테 너무너무 추천하는 방입니다!" },
             { name: "회철", location: "", rating: 5, quote: "위치가 정말 좋고, 아늑하면서도 넓은 공간이었습니다. 요청드린 새 이불과 수건도 빠르게 챙겨주셔서 편하게 지낼 수 있었어요. 이 지역에 다시 온다면 꼭 다시 묵고 싶습니다." },
-            { name: "지윤", location: "", rating: 5, quote: "호스트분들이 친절하고 응답도 빨랐어요. 공간도 깨끗하고 아늑했습니다. 꼭 추천하고 싶어요!" },
+            { name: "Sia", location: "", rating: 5, quote: "훌륭한 커뮤니케이션과 위치, 미니멀한 숙소를 원하는 1인에게 완벽한 숙소입니다." },
+            { name: "Cho", location: "", rating: 5, quote: "매니저와 보조 관리자가 매우 도움이 되었습니다! 필요한 요청사항을 모두 친절하게 챙겨주셨고, 위치도 훌륭해서 필요한 모든 곳으로 편리하게 이동할 수 있습니다." },
             { name: "지혜", location: "", rating: 5, quote: "즐거운 숙박이었습니다. 공간이 넓고 아늑했어요. 책상, 좋은 와이파이, TV 등 필요한 것들이 잘 갖춰져 있어서 일하기에도 쉬기에도 좋았습니다." },
           ],
         },
@@ -471,14 +473,14 @@
           locale: "en_US",
         },
         nav: [
-          { href: "#about", label: "About" },
+          { href: "#quick-facts", label: "Quick Facts" },
           { href: "#gallery", label: "Gallery" },
           { href: "#included", label: "Included" },
           { href: "#testimonials", label: "Reviews" },
           { href: "#faq", label: "FAQ" },
           { href: "#contact", label: "Contact" },
         ],
-        sections: ["hero", "trustStrip", "concept", "gallery", "included", "testimonials", "location", "faq", "contact"],
+        sections: ["hero", "trustStrip", "quickFacts", "gallery", "included", "testimonials", "location", "faq", "contact"],
         trustStrip: {
           items: [
             { icon: "manager", title: "On-site manager, 1st floor", desc: "Our manager on the first floor helps with check-in, check-out, and keeps the building secure." },
@@ -488,9 +490,8 @@
         },
         hero: {
           kicker: "Solo traveler stay · Furnished room · Seoul",
-          title: "A furnished private room in Seoul for solo travelers",
-          subtitle:
-            "Homestead Seoul offers furnished private rooms for one person per room, designed for solo travelers who want a calm, practical base in Seoul.",
+          title: "A private room in Seoul<br>2 min from Bangbae Station",
+          subtitle: "Private room / Private bathroom / No hidden fees / Move in anytime",
           chips: ["Solo occupancy only", "Private bathroom", "Furnished essentials", "Subway access"],
           notes: ["From $19.99/day"],
           primaryAction: { href: "#contact", label: "Check availability" },
@@ -502,23 +503,15 @@
             { title: "Privacy that fits a longer stay" },
           ],
         },
-        concept: {
-          eyebrow: "About",
-          title: "A furnished private-room stay for solo travelers",
+        quickFacts: {
+          eyebrow: "Quick Facts",
+          title: "",
           desc: "",
-          cards: [
-            {
-              title: "One person per room",
-              copy: "Every room is strictly for solo occupancy, so the stay feels private and straightforward rather than shared.",
-            },
-            {
-              title: "Furnished for daily life",
-              copy: "You move into a room that is already set up for sleeping, storing food, doing laundry, and handling everyday routines.",
-            },
-            {
-              title: "A better fit for longer Seoul stays",
-              copy: "This is aimed at solo travelers, interns, exchange students, and other guests who want a practical base for weeks or months.",
-            },
+          items: [
+            { label: "Price", value: "From $19.99/day", note: "B type room" },
+            { label: "Deposit", value: "Refundable", note: "" },
+            { label: "Monthly fees", value: "None", note: "" },
+            { label: "Utilities", value: "Included", note: "" },
           ],
         },
         collections: {
@@ -587,10 +580,9 @@
           title: "A practical Seoul base near Bangbae Station",
           desc: "",
           points: [
-            "About 1-2 minutes on foot to Bangbae Station",
-            "Useful Line 2 access for Gangnam-side commutes and wider Seoul movement",
-            "Easy transfer potential via nearby Sadang routes",
-            "A calmer fit for solo travelers who want privacy and routine",
+            "1-2 min walk to Bangbae Station",
+            "Line 2 access to Gangnam and beyond",
+            "Easy transfer at Sadang Station",
           ],
           sideTitle: "",
           sideBody: "",
@@ -599,10 +591,10 @@
           eyebrow: "FAQ",
           title: "Questions solo travelers often ask",
           items: [
-            { q: "Is this a hotel or hostel?", a: "No. Homestead Seoul offers private single-occupancy furnished rooms for longer solo stays." },
+            { q: "Is this a hotel or hostel?", a: "No, it's private single-occupancy rooms for longer stays." },
             { q: "Do I get my own bathroom?", a: "Yes. Every room includes a private bathroom." },
-            { q: "Who is this best for?", a: "Solo travelers, interns, exchange students, and other long-stay guests who want a practical room in Seoul." },
-            { q: "How do I reserve a room?", a: "Contact us first, confirm your dates, receive a payment link by email or WhatsApp, and then pay the refundable incidental deposit and monthly rent to confirm your booking." },
+            { q: "Who is this best for?", a: "Solo travelers, interns, and exchange students staying longer term." },
+            { q: "How do I reserve a room?", a: "Message us to confirm dates, then pay the deposit and first month's rent to book." },
             { q: "Are utilities extra?", a: "No. The monthly price does not add extra utility charges." },
             { q: "Can two people stay in one room?", a: "No. Every room is for single occupancy only." },
           ],
@@ -638,7 +630,7 @@
           copy: "A calm, practical Seoul base for solo travelers who want a private room instead of a shared stay.",
           address: "",
           links: [
-            { href: "#about", label: "About" },
+            { href: "#quick-facts", label: "Quick Facts" },
             { href: "#gallery", label: "Gallery" },
             { href: "#contact", label: "Contact" },
           ],
